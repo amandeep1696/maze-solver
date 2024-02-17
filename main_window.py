@@ -7,7 +7,23 @@ class Window:
         self.canvas = Canvas(self.root, width=width, height=height)
         self.canvas.pack(fill=BOTH, expand=True)
         self.is_running = False
+        self.root.protocol("WM_DELETE_WINDOW", self.close)
     
     def redraw(self):
         self.root.update_idletasks()
         self.root.update()
+    
+    def wait_for_close(self):
+        self.is_running = True
+        while self.is_running:
+            self.redraw()
+            self.root.after(100)  
+    
+    def close(self):
+        self.is_running = False
+
+if __name__ == "__main__":
+    win = Window(800, 600)
+    win.wait_for_close()
+    
+
