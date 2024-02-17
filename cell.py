@@ -1,7 +1,8 @@
 from graphics import Line, Point
 
+
 class Cell:
-    def __init__(self, win):
+    def __init__(self, win=None):
         self.has_left_wall = True
         self.has_right_wall = True
         self.has_top_wall = True
@@ -45,24 +46,28 @@ class Cell:
         if undo:
             fill_color = "gray"
 
+        # moving left
         if self._x1 > to_cell._x1:
             line = Line(Point(self._x1, y_mid), Point(x_mid, y_mid))
             self._win.draw_line(line, fill_color)
             line = Line(Point(to_x_mid, to_y_mid), Point(to_cell._x2, to_y_mid))
             self._win.draw_line(line, fill_color)
 
+        # moving right
         elif self._x1 < to_cell._x1:
             line = Line(Point(x_mid, y_mid), Point(self._x2, y_mid))
             self._win.draw_line(line, fill_color)
             line = Line(Point(to_cell._x1, to_y_mid), Point(to_x_mid, to_y_mid))
             self._win.draw_line(line, fill_color)
 
+        # moving up
         elif self._y1 > to_cell._y1:
             line = Line(Point(x_mid, y_mid), Point(x_mid, self._y1))
             self._win.draw_line(line, fill_color)
             line = Line(Point(to_x_mid, to_cell._y2), Point(to_x_mid, to_y_mid))
             self._win.draw_line(line, fill_color)
 
+        # moving down
         elif self._y1 < to_cell._y1:
             line = Line(Point(x_mid, y_mid), Point(x_mid, self._y2))
             self._win.draw_line(line, fill_color)
