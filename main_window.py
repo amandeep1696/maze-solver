@@ -22,6 +22,11 @@ class Window:
     def close(self):
         self.is_running = False
 
+class Point:
+    def __init__(self, x=0, y=0):
+        self.x = x  
+        self.y = y
+
 if __name__ == "__main__":
     win = Window(800, 600)
     win.wait_for_close()
